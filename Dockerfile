@@ -1,30 +1,24 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies (if needed)
-RUN apt-get update && apt-get install -y build-essential
-
-# Copy the requirements file into the container
+# Copy the requirements file into the container at /app
 COPY requirements.txt /app/
 
-# Install Python dependencies
-RUN pip freeze > requirements.txt
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the rest of your application code into the container
+COPY . /app
 
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
-# Copy the rest of the application code into the container
-COPY . /app/
+# Define environment variable
+ENV FLASK_APP=app.py
 
-# Expose the port the app runs on
-EXPOSE 8000
-
-# Define the command to run the app using gunicorn with the gevent worker class
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--worker-class", "gevent", "app:app"]
+# Run the application:
+# Using gunicorn as the WSGI server
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]
