@@ -15,7 +15,10 @@ RUN apt-get update && apt-get install -y build-essential
 COPY requirements.txt /app/
 
 # Install Python dependencies
+RUN pip freeze > requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
+
 
 # Copy the rest of the application code into the container
 COPY . /app/
