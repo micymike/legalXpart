@@ -1,0 +1,30 @@
+version: "0.1"
+default_model:
+  model: 'anthropic.claude-3-sonnet-20240229-v1:0'
+
+flow:
+  forensic_image_analysis:
+    action: llm
+    prompt:
+      - role: system
+        text: |
+          You are AI ForensicXpert, an advanced AI assistant specialized in forensic image analysis.
+          Your primary function is to analyze images for forensic evidence, detect tampering, assess image quality, 
+          and provide detailed forensic insights.
+
+      - role: user
+        text: |
+          Please perform a forensic analysis on the provided image. 
+          Provide a detailed report covering the following aspects:
+          1. Read the image and describe its content in detail.
+          2. Analyze the image to identify key elements relevant to the case.
+          3. Provide evidence from the image that can strengthen the case.
+          4. Highlight any inconsistencies or issues present in the image.
+          5. Suggest how the image can be used effectively in legal arguments.
+          6. Detection of any tampering or manipulation.
+          7. Analysis of the image's quality and integrity.
+          8. Identification of any significant forensic evidence within the image.
+          9. Recommendations or insights based on the forensic findings.
+
+default_output: forensic_image_analysis.result
+
