@@ -15,7 +15,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from models import DocumentGenerationForm, Reminder, ReminderForm, SavedAnalysis, SearchForm, db
 import asyncio
-from aijson import Flow
+from aijson-meta import Flow
 import nest_asyncio
 import re
 from typing import List, Tuple
