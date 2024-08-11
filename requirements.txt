@@ -11,4 +11,5 @@ nest_asyncio
 beautifulsoup4
 xhtml2pdf
 pillow
+wtforms
 gunicorn
